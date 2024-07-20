@@ -1,6 +1,7 @@
 const express = require ('express');
 const {create, updateUser, login, countUsers,submitFeedback} = require ('../controllers/userControl');
 const { getAllComplaint, getCount,getComplaintsByUserId} = require ("../controllers/reportControl");
+// const cloudinary = require("../utils/cloudinary");
 const Report = require ('../models/Report');
 const User = require('../models/User')
 const {getAllNews} = require ('../controllers/adminControl');
@@ -73,6 +74,7 @@ const upload = multer({
 
 userRouter.post('/complaint/:id', upload, async (req, res) => {
   try {
+    // const result = await cloudinary.uploader.upload(req.file.path);
     const { crime, location, description } = req.body;
     const { id: userID } = req.params;
 
@@ -92,6 +94,7 @@ userRouter.post('/complaint/:id', upload, async (req, res) => {
       crime,
       location,
       description,
+      // evidence: result.secure_url,
       evidence: 'http://localhost:7000/Evidence/' + req.file.filename,
       userID
     });
