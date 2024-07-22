@@ -49,7 +49,7 @@ exports.policeLogin = async (req, res) => {
             sentence
         } = req.body;
 
-        const image = req.file ? 'http://localhost:7000/Criminal/' + req.file.filename : '';
+        const image = req.file ? 'https://c-man-api.onrender.com/Criminal/' + req.file.filename : '';
 
         // Create a new criminal instance
         const newCriminal = new Criminal({
@@ -155,7 +155,7 @@ exports.approveCriminal = async (req, res) => {
 exports.addMissing = async (req, res) => {
   try {
     const newMissing = new Missing({
-      image: 'http://localhost:7000/Missing/' + req.file.filename,
+      image: 'https://c-man-api.onrender.com/Missing/' + req.file.filename,
       fullname: req.body.fullname,
       gender: req.body.gender,
       age: req.body.age,

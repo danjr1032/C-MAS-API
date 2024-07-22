@@ -99,7 +99,7 @@ exports.addPolice = async (req, res) => {
           bloodGroup,
           DOB,
           nextOfKin,
-          image: 'http://localhost:7000/policeImages/' + req.file.filename,
+          image: 'https://c-man-api.onrender.com/policeImages/' + req.file.filename,
           badgeNumber
       });
 
@@ -151,7 +151,7 @@ exports.getPoliceById = async (req, res) => {
 exports.createNews = async (req, res) => {
   try {
       const { headline, content } = req.body;
-      const image = 'http://localhost:7000/uploads/' + req.file.filename;
+      const image = 'https://c-man-api.onrender.com/uploads/' + req.file.filename;
 
       // Create a new news instance
       const newNews = new News({
