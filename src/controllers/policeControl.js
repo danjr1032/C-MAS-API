@@ -2,6 +2,8 @@ const upload = require ('../auth/multer')
 const Police = require('../models/Police')
 const Criminal = require('../models/Criminal');
 const Missing = require ('../models/Missing');
+const cloudinary = require ('../utils/cloudinary')
+const path = require ('path');
 
 exports.policeLogin = async (req, res) => {
     try{
@@ -49,11 +51,12 @@ exports.policeLogin = async (req, res) => {
             sentence
         } = req.body;
 
-        const image = req.file ? 'https://c-man-api.onrender.com/Criminal/' + req.file.filename : '';
+        // const image = req.file ? 'https://c-man-api.onrender.com/Criminal/' + req.file.filename : '';
+        const result = await cloudinary.uploader.upload(req.file.path);
 
         // Create a new criminal instance
         const newCriminal = new Criminal({
-            image: image,
+            image: result.secure_url,
             fullname: fullname,
             gender: gender,
             DOB: DOB,
@@ -154,8 +157,10 @@ exports.approveCriminal = async (req, res) => {
 //Adding missing person
 exports.addMissing = async (req, res) => {
   try {
+    const result = await cloudinary.uploader.upload(req.file.path);
     const newMissing = new Missing({
-      image: 'https://c-man-api.onrender.com/Missing/' + req.file.filename,
+      image: result.secure_url,
+    //   image: 'https://c-man-api.onrender.com/Missing/' + req.file.filename,
       fullname: req.body.fullname,
       gender: req.body.gender,
       age: req.body.age,

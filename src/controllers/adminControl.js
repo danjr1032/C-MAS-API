@@ -7,6 +7,8 @@ const FeedBack = require ('../models/Feedback');
 const News = require('../models/News');
 const jwt = require ('jsonwebtoken');
 const bcrypt = require ('bcryptjs')
+const cloudinary = require ('../utils/cloudinary')
+const path = require('path');
 // const upload = require('../auth/upload');
 
 
@@ -86,9 +88,11 @@ exports.adminLogin = async (req, res) => {
 exports.addPolice = async (req, res) => {
   try {
       const { fullname, phone, email, password, rank, bloodGroup, DOB, nextOfKin, badgeNumber } = req.body;
-      const image = req.file ? req.file.filename : null;
+      // const image = req.file ? req.file.filename : null;
 
       const hashedPassword = await hashPassword(password);
+    const result = await cloudinary.uploader.upload(req.file.path);
+      
       // Create a new police officer instance
       const newPoliceOfficer = new Police({
           fullname,
@@ -99,7 +103,8 @@ exports.addPolice = async (req, res) => {
           bloodGroup,
           DOB,
           nextOfKin,
-          image: 'https://c-man-api.onrender.com/policeImages/' + req.file.filename,
+          image: result.secure_url,
+          // image: 'https://c-man-api.onrender.com/policeImages/' + req.file.filename,
           badgeNumber
       });
 
@@ -151,12 +156,13 @@ exports.getPoliceById = async (req, res) => {
 exports.createNews = async (req, res) => {
   try {
       const { headline, content } = req.body;
-      const image = 'https://c-man-api.onrender.com/uploads/' + req.file.filename;
+      // const image = 'https://c-man-api.onrender.com/uploads/' + req.file.filename;
+      const result = await cloudinary.uploader.upload(req.file.path);
 
       // Create a new news instance
       const newNews = new News({
           headline,
-          image,
+          image: result.secure_url,
           content,
       });
 

@@ -1,7 +1,7 @@
 const express = require ('express');
 const {create, updateUser, login, countUsers,submitFeedback} = require ('../controllers/userControl');
 const { getAllComplaint, getCount,getComplaintsByUserId} = require ("../controllers/reportControl");
-// const cloudinary = require("../utils/cloudinary");
+const cloudinary = require("../utils/cloudinary");
 const Report = require ('../models/Report');
 const User = require('../models/User')
 const {getAllNews} = require ('../controllers/adminControl');
@@ -74,28 +74,29 @@ const upload = multer({
 
 userRouter.post('/complaint/:id', upload, async (req, res) => {
   try {
-    // const result = await cloudinary.uploader.upload(req.file.path);
     const { crime, location, description } = req.body;
     const { id: userID } = req.params;
-
+    
     console.log('Received data:', req.body);
     console.log('File:', req.file);
-
+    
     if (!crime || !location || !description || !req.file) {
       return res.status(400).json({ error: 'All fields are required: crime, location, description, evidence' });
     }
-
+    
     const user = await User.findById(userID);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-
+    
+    const result = await cloudinary.uploader.upload(req.file.path);
     const newReport = new Report({
       crime,
       location,
       description,
-      // evidence: result.secure_url,
-      evidence: 'https://c-man-api.onrender.com/Evidence/' + req.file.filename,
+      evidence: result.secure_url,
+      cloudinary_id: result.public_id,
+      // evidence: 'https://c-man-api.onrender.com/Evidence/' + req.file.filename,
       userID
     });
 

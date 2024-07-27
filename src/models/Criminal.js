@@ -111,6 +111,10 @@ const criminalSchema = new Schema({
         default:" "
     },
     
+    cloudinary_id:{
+        type: String
+    },
+    
 });
 
 const Criminal = mongoose.model('Criminal', criminalSchema);

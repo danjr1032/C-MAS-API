@@ -37,7 +37,12 @@ const reportSchema = new mongoose.Schema({
     required: true,
     enum: ['Pending', 'In Progress', 'Resolved'],
     default: 'In Progress'
-  }
+  },
+
+  cloudinary_id:{
+    type: String
+  },
+  
 }, {
   timestamps: true
 });

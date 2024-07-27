@@ -63,6 +63,9 @@ const policeSchema = new Schema({
         required: true,
         unique: true
     },
+    cloudinary_id:{
+        type: String
+    },
 });
 
 const Police = mongoose.model('Police', policeSchema);

@@ -30,6 +30,9 @@ const missingSchema = new Schema({
         type: String,
         required: true,
     },
+    cloudinary_id:{
+        type: String
+    },
     
 });
 
