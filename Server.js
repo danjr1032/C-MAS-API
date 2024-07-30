@@ -15,11 +15,18 @@ require('dotenv').config();
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+    origin: '*', 
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', 
+    allowedHeaders: ['Content-Type', 'Authorization'] 
+};
+
+app.use(cors(corsOptions));
+
 
 // Configure session middleware
 app.use(session({
-    secret: process.env.SESSION_SECRET, // Change this to a long, randomly generated string
+    secret: process.env.SESSION_SECRET, 
     resave: false,
     saveUninitialized: true
   }));
