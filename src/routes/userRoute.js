@@ -6,6 +6,7 @@ const Report = require ('../models/Report');
 const User = require('../models/User')
 const {getAllNews} = require ('../controllers/adminControl');
 const {getAllMissing} = require ('../controllers/policeControl');
+// const {authenticateToken} = require ('../utils/auth');
 const multer = require('multer')
 const path = require('path');
 const userRouter = express.Router();

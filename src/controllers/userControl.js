@@ -1,5 +1,6 @@
 const User = require ('../models/User');
 const bcrypt = require ('bcryptjs');
+const jwt = require ('jsonwebtoken')
 const Missing = require ('../models/Missing')
 const FeedBack = require('../models/Feedback');
 
@@ -106,8 +107,48 @@ exports.login = async (req, res) => {
 };
 
 
+// const secret = 'YilMwaghavulshang';
 
-//Send feedback
+// exports.login = async (req, res) => {
+//   const { email, password } = req.body;
+
+//   if (email === '' || password === '') {
+//     return res.status(400).json({ message: 'All fields are required' });
+//   }
+
+//   try {
+//     const user = await User.findOne({ email });
+
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+
+//     const isPasswordValid = await comparePassword(password, user.password);
+
+//     if (!isPasswordValid) {
+//       return res.status(401).json({ message: 'Incorrect password' });
+//     }
+
+//     const token = jwt.sign({ id: user._id }, secret, { expiresIn: '1h' });
+
+//     res.json({
+//       success: true,
+//       message: 'Login successful',
+//       user,
+//       token
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Server error' });
+//   }
+// };
+
+
+
+
+
+
+// //Send feedback
 exports.submitFeedback = async (req, res) => {
   const { fullname, email, message } = req.body;
 
@@ -172,6 +213,7 @@ exports.createMissing = async (req, res) => {
       res.status(400).json({ message: error.message });
   }
 };
+
 
 
 

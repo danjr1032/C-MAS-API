@@ -1,6 +1,6 @@
 const express = require('express');
 const {policeLogin, createCriminal, getAllCriminals, countMissing,countCriminals,getCriminalById, addMissing, getAllMissing, getMissingById, deleteCriminalById} = require('../controllers/policeControl');
-const{getAllComplaint, countCrimes, deleteComplaint} = require ('../controllers/reportControl');
+const{getAllComplaint, countCrimes,updateComplaint, getComplaintById, deleteComplaint} = require ('../controllers/reportControl');
 const policeRouter = express.Router();
 const multer = require('multer')
 const path = require('path');
@@ -88,6 +88,9 @@ policeRouter.get('/count', countCrimes);
 policeRouter.get('/count', countCriminals);
 policeRouter.get('/count', countMissing);
 
+
+policeRouter.put('/complaint/:id',updateComplaint);
+policeRouter.get('/complaints/:id',getComplaintById);
 policeRouter.post('/getSingleMissing', getMissingById);
 policeRouter.get('/complaints', getAllComplaint);
 policeRouter.delete('/complaints/:id', deleteComplaint);

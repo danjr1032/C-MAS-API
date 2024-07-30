@@ -3,7 +3,40 @@ const multer = require('multer');
 const path = require ('path')
 
 
-
+//Update of complaint
+exports.updateComplaint = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { status, progressReport } = req.body;
+      
+      if (!status && !progressReport) {
+        return res.status(400).json({ error: 'At least one of status or progressReport is required' });
+      }
+  
+      const updateFields = {};
+      if (status) {
+        updateFields.status = status;
+      }
+      if (progressReport) {
+        updateFields.progressReport = progressReport;
+      }
+  
+      const updatedReport = await Report.findByIdAndUpdate(id, updateFields, { new: true });
+      
+      if (!updatedReport) {
+        return res.status(404).json({ error: 'Report not found' });
+      }
+  
+      res.status(200).json({ 
+        message: 'Report updated successfully', 
+        report: updatedReport 
+      });
+  
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
 
 // Get all complaints
 exports.getAllComplaint = async (req, res) => {
@@ -22,7 +55,7 @@ exports.getAllComplaint = async (req, res) => {
 
 exports.getComplaintsByUserId = async (req, res) => {
     try {
-        const userId = req.params.userID; 
+        const userId = req.params._id; 
         const reports = await Report.find({ userId: userId }); 
         if (reports.length > 0) {
             res.json(reports);
@@ -33,6 +66,20 @@ exports.getComplaintsByUserId = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+exports.getComplaintById = async (req, res) => {
+    try {
+        const complaint = await Report.findById(req.params.id);
+        if (!complaint) {
+            return res.status(404).json({ success: false, message: 'Complaint not found' });
+        }
+        res.json({ success: true, complaint });
+    } catch (error) {
+        console.error('Error fetching complaint:', error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+};
+
 
 exports.getCount = async (req, res) => {
     try {

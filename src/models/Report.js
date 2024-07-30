@@ -31,6 +31,15 @@ const reportSchema = new mongoose.Schema({
   evidence: {
     type: String,
     required: true
+  },  
+  reportDate: {
+      type: Date,
+      default: Date.now
+  },
+  progressReport:{
+      type: String,
+      required: false,
+      default: "Open"
   },
   status: {
     type: String,
