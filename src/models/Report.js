@@ -45,7 +45,7 @@ const reportSchema = new mongoose.Schema({
     type: String,
     required: true,
     enum: ['Pending', 'In Progress', 'Resolved'],
-    default: 'In Progress'
+    default: 'Pending'
   },
 
   cloudinary_id:{
