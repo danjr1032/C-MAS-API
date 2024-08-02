@@ -14,14 +14,16 @@ require('dotenv').config();
 
 
 const app = express();
+app.use(cors());
 
-const corsOptions = {
-    origin: '*', 
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', 
-    allowedHeaders: ['Content-Type', 'Authorization'] 
-};
 
-app.use(cors(corsOptions));
+// const corsOptions = {
+//     origin: 'https://c-man-front-end.vercel.app/', 
+//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', 
+//     allowedHeaders: ['Content-Type', 'Authorization'] 
+// };
+
+// app.use(cors(corsOptions));
 
 
 // Configure session middleware

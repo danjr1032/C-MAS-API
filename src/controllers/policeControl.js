@@ -94,6 +94,29 @@ exports.policeLogin = async (req, res) => {
     }
 };
 
+
+
+exports.updateCriminal = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updateData = req.body;
+
+        const updatedCriminal = await Criminal.findByIdAndUpdate(id, updateData, { new: true });
+
+        if (!updatedCriminal) {
+            return res.status(404).json({ error: 'Criminal not found' });
+        }
+
+        res.status(200).json({ message: 'Criminal updated successfully', criminal: updatedCriminal });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+
+
+
 // Get all criminal records
 exports.getAllCriminals = async (req, res) => {
     try {
