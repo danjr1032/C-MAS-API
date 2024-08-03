@@ -16,9 +16,9 @@ require('dotenv').config();
 const app = express();
 
 const corsOptions = {
-    origin: 'https://c-man-front-end.vercel.app/', 
+    origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', 
-    allowedHeaders: ['Content-Type', 'Authorization'] 
+    optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
