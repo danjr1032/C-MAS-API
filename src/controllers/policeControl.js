@@ -7,7 +7,7 @@ const path = require ('path');
 
 exports.policeLogin = async (req, res) => {
     try{
-        const {badgeNumber, } = req.body;
+        const {badgeNumber, password} = req.body;
         const police = await Police.findOne({badgeNumber});
       
         if (!police){
