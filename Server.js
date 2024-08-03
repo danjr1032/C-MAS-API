@@ -14,16 +14,18 @@ require('dotenv').config();
 
 
 const app = express();
-app.use(cors());
+const allowedOrigins = ['https://c-man-front-end.vercel.app'];
 
-
-// const corsOptions = {
-//     origin: 'https://c-man-front-end.vercel.app/', 
-//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', 
-//     allowedHeaders: ['Content-Type', 'Authorization'] 
-// };
-
-// app.use(cors(corsOptions));
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true); // Allow requests with no origin (e.g., mobile apps, curl requests)
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    }
+}));
 
 
 // Configure session middleware
