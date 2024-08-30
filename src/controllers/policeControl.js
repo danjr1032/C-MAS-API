@@ -13,7 +13,7 @@ exports.policeLogin = async (req, res) => {
         if (!police){
             res.status(404).json("Police not found");
         }
-        res.json({ success: true, message: 'Login successful!' });
+        res.json({ success: true, message: 'Login successful!', police});
         // res.status(201).json({success: true, message: "Police logged in Successfully.", police})
     }
     catch(err){
