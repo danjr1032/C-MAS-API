@@ -302,7 +302,7 @@ exports.deleteComplaint = async (req, res) => {
 exports.deleteFeedback = async (req, res) => {
   const { id } = req.params;
   try {
-    const feedback = await Feedback.findByIdAndDelete(id);
+    const feedback = await FeedBack.findByIdAndDelete(id);
 
     if (!feedback) {
       return res.status(404).json({ error: 'feedback not found' });
