@@ -300,9 +300,9 @@ exports.deleteComplaint = async (req, res) => {
 
 // Function to delete feedback
 exports.deleteFeedback = async (req, res) => {
-
+  const { id } = req.params;
   try {
-    const feedback = await Feedback.findByIdAndDelete(req.params.id);
+    const feedback = await Feedback.findByIdAndDelete(id);
 
     if (!feedback) {
       return res.status(404).json({ error: 'feedback not found' });
