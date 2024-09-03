@@ -42,6 +42,10 @@ const policeSchema = new Schema({
         type:String,
         required: true
     },
+    gender: {
+        type:String,
+        required: true
+    },
     bloodGroup:{
         type:String,
         required: true

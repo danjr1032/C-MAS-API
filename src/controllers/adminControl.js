@@ -87,7 +87,7 @@ exports.adminLogin = async (req, res) => {
 //POLICE CONTROL
 exports.addPolice = async (req, res) => {
   try {
-      const { fullname, phone, email, password, rank, bloodGroup, DOB, nextOfKin, badgeNumber } = req.body;
+      const { fullname, phone, email, password, rank, bloodGroup, DOB, nextOfKin, badgeNumber, gender } = req.body;
       // const image = req.file ? req.file.filename : null;
 
       const hashedPassword = await hashPassword(password);
@@ -100,6 +100,7 @@ exports.addPolice = async (req, res) => {
           email,
           password:hashedPassword,
           rank,
+          gender,
           bloodGroup,
           DOB,
           nextOfKin,
