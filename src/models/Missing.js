@@ -19,7 +19,7 @@ const missingSchema = new Schema({
     },
     gender: {
         type: String,
-        enum: ['Male', 'Female', 'Other'],
+        enum: ['Male', 'male','Female', 'female','Other', 'other'],
         required: true
     },
     age: {

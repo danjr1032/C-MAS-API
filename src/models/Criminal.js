@@ -21,7 +21,7 @@ const criminalSchema = new Schema({
     },
     gender: {
         type: String,
-        enum: ['Male', 'Female', 'Other'],
+        enum: ['Male', 'male','Female','female', 'other', 'Other'],
         required: true
     },
     DOB: {
