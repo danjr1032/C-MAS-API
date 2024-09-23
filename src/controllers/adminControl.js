@@ -349,6 +349,23 @@ exports.deleteCriminal = async (req, res) => {
 
 
 
+// Delete news
+exports.deleteNews = async (req, res) => {
+  try {
+      const news = await News.findById(req.params.id);
+      if (news) {
+          await news.remove();
+          res.json({ message: "News deleted" });
+      } else {
+          res.status(404).json({ message: "News not found" });
+      }
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
+};
+
+
+
 
 
 

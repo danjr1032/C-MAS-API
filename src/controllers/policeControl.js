@@ -158,6 +158,21 @@ exports.deleteCriminalById = async (req, res) => {
 };
 
 
+//delete a Missing person
+exports.deleteMissingById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const deletedMissing = await Missing.findByIdAndDelete(id);
+        if (deletedMissing) {
+            res.status(200).json({ message: 'Missing Person deleted successfully', person: deletedMissing });
+        } else {
+            res.status(404).json({ message: 'Missing Person not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to delete Missing Person', error: error.message });
+    }
+};
+
 
 
 

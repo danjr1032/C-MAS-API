@@ -1,7 +1,7 @@
 const express = require('express');
 const adminRouter = express.Router();
 const { createAdmin, adminLogin, addPolice,getAllPolice, getPoliceById} = require('../controllers/adminControl');
-const {createNews, getAllNews, getNewsById, addComment, deleteUserById, deleteComplaint, deleteFeedback, getAllFeedback, deletePolice} = require ("../controllers/adminControl");
+const {createNews, getAllNews, getNewsById, addComment, deleteUserById, deleteComplaint, deleteFeedback, getAllFeedback, deletePolice, deleteNews} = require ("../controllers/adminControl");
 const{getAllComplaint, countCrimes,getComplaintById} = require('../controllers/reportControl');
 const {getAllUser, countUsers, countFeedbacks} = require ('../controllers/userControl');
 const multer = require('multer')
@@ -94,6 +94,7 @@ adminRouter.delete('/admini/user/:id', deleteUserById);
 adminRouter.delete('/admini/complaint/:id', deleteComplaint);
 adminRouter.delete('/admini/feedback/:id', deleteFeedback);
 adminRouter.delete('/admini/police/:id', deletePolice);
+adminRouter.delete('/admini/news/:id', deleteNews);
 
 
 module.exports = adminRouter;
